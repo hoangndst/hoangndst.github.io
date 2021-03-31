@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  
+<!-- Mirrored from reasonabledeviations.com/Notes/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Mar 2021 15:31:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="Description" content="Academic blog about quantitative finance, programming, math.">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+         Revision notes &middot; Reasonable Deviations 
+    </title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/poole.css">
+    <link rel="stylesheet" href="../css/syntax.css">
+    <link rel="stylesheet" href="../css/hyde.css">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/site.webmanifest"> -->
+    <link rel="mask-icon" href="../assets/safari-pinned-tab.svg" color="#41a9c7">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="../assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../atom.xml">
+
+    <!-- Javascript -->
+    
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DEV7XD3S2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1DEV7XD3S2');
+    </script>    
+
+</head>
+
+
+  <body class="theme-base-purpz">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+      <h1>
+        <a href="../index.html">
+          Reasonable Deviations
+        </a>
+      </h1>
+      <p class="lead">a rational approach to complexity</p>
+
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item " href="../index.html">Home</a>
+
+      
+
+      
+      
+        
+        
+          
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../Archive/index.html">Post archive</a>
+          
+        
+      
+        
+            
+        
+        
+          
+            <a class="sidebar-nav-item  active " href="index.html">Revision notes</a>
+          
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../about/index.html">About</a>
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../Projects/index.html"></a>
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+
+      <div class="sidebar-nav-item">
+          <p>
+              <a href="https://github.com/robertmartin8">
+              Github <i class="fa fa-github" aria-hidden="true"></i></a>
+              &nbsp;
+              <a href="https://www.linkedin.com/in/robert-a-martin/">
+                  LinkedIn <i class="fa fa-linkedin-square"></i>
+              </a>&nbsp;
+              <a class="sidebar-nav-item" id="open-popup" href="#">
+                    Subscribe <i class="fa fa-envelope"></i>
+             </a>
+          </p>
+      </div>
+    </nav>
+
+    <p>&copy Robert Andrew Martin 2021. All rights reserved. <a style="color: rgba(255,255,255,.5);" href="../Disclaimer/index.html">Disclaimer.</a></p>
+  </div>
+</div>
+
+<!-- Mailchimp -->
+<script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+<script type="text/javascript">
+function showMailingPopUp() {
+    console.log("showing popup");
+    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us8.list-manage.com","uuid":"31c71a4d79bd53ab3c537a59e","lid":"2416515c90","uniqueMethods":true}) })
+    document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
+
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Revision notes</h1>
+  <p>Over the course of my studies, I have amassed a large quantity of notes and summaries. Over time, I will try to upload as many as possible – it’d be nice if they were all in one place.</p>
+
+<ul>
+  <li><strong>Cambridge Natural Sciences</strong>
+    <ul>
+      <li><a href="IB_physics/index.html">IB Physics</a></li>
+      <li><a href="IB_maths/index.html">IB Maths</a></li>
+      <li><a href="IA_materials_science/index.html">IA Materials Science</a></li>
+      <li><a href="IA_physics/index.html">IA Physics</a></li>
+      <li>IA Computer Science
+        <ul>
+          <li><a href="FoCS/index.html">Foundations of Computer Science (Standard ML)</a></li>
+          <li><a href="SML_problems/index.html">Standard ML exercises and solutions</a></li>
+          <li><a href="oop/index.html">Object Oriented Programming (Java)</a></li>
+          <li><a href="Algorithms/index.html">Algorithms</a></li>
+          <li><a href="DataStructures/index.html">Data Structures</a></li>
+          <li><a href="../assets/notes/1A_numanalys.pdf">Numerical Analysis</a></li>
+        </ul>
+      </li>
+      <li><a href="../assets/notes/1A_maths.pdf">IA Maths</a></li>
+    </ul>
+  </li>
+  <li><strong>Online courses</strong>
+    <ul>
+      <li><a href="princeton_bitcoin/index.html">Bitcoin and Cryptocurrencies – Princeton</a></li>
+      <li><a href="quantopian_lectures/index.html">Quantopian Lecture Series on Quantitative Finance</a></li>
+      <li><a href="aswath_valuation/index.html">Valuation – Aswath Damodaran</a></li>
+      <li><a href="game_theory/index.html">Game Theory – Yale (Econ 159)</a></li>
+      <li><a href="introduction_to_complexity/index.html">Introduction to Complexity – Santa Fe Institute</a></li>
+      <li><a href="aswath_corpfin/index.html">Corporate Finance – Aswath Damodaran (Unfinished)</a></li>
+      <li><a href="CBOE_options/index.html">CBOE Options</a></li>
+    </ul>
+  </li>
+  <li><a href="../academic_papers/index.html"><strong>Notes on academic papers</strong></a></li>
+  <li><a href="#textbook-notes"><strong>Textbook notes</strong></a>
+    <ul>
+      <li><a href="#qed-the-strange-theory-by-richard-feynman">QED: The Strange Theory – Richard Feynman</a></li>
+      <li><a href="#the-feynman-lectures-on-physics">The Feynman Lectures on Physics – Richard Feynman</a></li>
+      <li><a href="#why-chemical-reactions-happen">Why Chemical Reactions Happen – Keeler and Wothers</a></li>
+      <li><a href="intro_stat_learn/index.html">Introduction to Statistical Learning – James, Witten, Hastie, Tibshirani</a></li>
+      <li><a href="el_stat_learn/index.html">Elements of Statistical learning – Hastie, Tibshirani, Friedman</a></li>
+      <li><a href="adv_fin_ml/index.html">Advances in Financial Machine Learning – Marcos Lopez de Prado</a>
+  <!-- - [Bayesian Methods for Hackers – Cameron Davidson-Pilon](https://reasonabledeviations.com/notes/bayesian_methods_for_hackers) --></li>
+      <li><a href="hull_options.html">Options, Futures, and other Derivatives – John C. Hull</a></li>
+    </ul>
+  </li>
+  <li><a href="#miscellaneous-notes"><strong>Miscellaneous notes</strong></a>
+    <ul>
+      <li><a href="#the-binomial-theorem">The Binomial Theorem</a></li>
+      <li><a href="#ct1-financial-mathematics">CT1 Financial Mathematics</a></li>
+      <li><a href="#introduction-to-boosted-trees">Introduction to Boosted Trees</a></li>
+      <li><a href="../assets/notes/BlackLitterman.pdf">The Black-Litterman model</a></li>
+      <li><a href="investing_checklist/index.html">Equity Investing Checklist</a></li>
+      <li><a href="../assets/notes/kelly_betting.pdf">Kelly Criterion one-pager</a></li>
+    </ul>
+  </li>
+  <li><strong>International Baccalaureate (IB) notes</strong>
+    <ul>
+      <li><a href="hl_maths/index.html">Mathematics (higher level)</a></li>
+      <li><a href="hl_physics/index.html">Physics (higher level)</a></li>
+      <li><a href="hl_chemistry/index.html">Chemistry (higher level)</a></li>
+    </ul>
+  </li>
+  <li><strong>IGCSE (Cambridge 2013 syllabus) notes</strong>
+    <ul>
+      <li><a href="https://drive.google.com/file/d/11dTvlSmN_20vo6O6bUb7DSY4b_GtVHj-/view?usp=sharing">Biology</a></li>
+      <li><a href="https://drive.google.com/file/d/1pKZJXmB5axAYLYxaWSfnclcSSpZIzK2X/view?usp=sharing">Chemistry</a></li>
+      <li><a href="https://drive.google.com/file/d/1IV7VfZfZKI6tkFpLj1EPYvO1FXBAcii8/view?usp=sharing">Physics</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="textbook-notes">Textbook notes</h2>
+
+<h3 id="qed-the-strange-theory-by-richard-feynman">QED: The Strange Theory, by Richard Feynman</h3>
+
+<p><a href="https://reasonabledeviations.files.wordpress.com/2016/02/qed-chapters-1-and-2.pdf" title="QED Chapters 1 and 2">QED Chapters 1 and 2</a></p>
+
+<p><a href="https://reasonabledeviations.files.wordpress.com/2016/02/qed-chapters-3-and-4.pdf" title="QED Chapters 3 and 4">QED Chapters 3 and 4</a></p>
+
+<p>A few years ago I read ‘Surely You’re Joking, Mr Feynman’, and since then fell in love with Feynman’s style of teaching physics. ‘QED: A Strange Theory’ is a semi-technical book in which Feynman discusses the physics substantively rather than just talking about physics as a discipline. Just to clarify, I have no complaint whatsoever with him talking about physics from a more ‘meta’ point of view, as was done in ‘The Character of Physical Law’. I read the book, and loved it. He doesn’t sacrifice any of his characteristic charm, while still explaining the counterintuitive theory. This book was transcribed from a series of lectures (<a href="https://www.youtube.com/watch?v=eLQ2atfqk2c">available on youtube</a>), so is naturally quite verbose.</p>
+
+<h3 id="the-feynman-lectures-on-physics">The Feynman Lectures on Physics</h3>
+
+<p>So far I’ve only done a few chapters of volume 1. I really intended to work through it in its totality at one stage, but I realised that I should use my time before university to learn things other than physics.</p>
+
+<ul>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-6.pdf" title="Feynman 6">Feynman 6</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-7.pdf" title="Feynman 7">Feynman 7</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-8.pdf" title="Feynman 8">Feynman 8</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-9.pdf" title="Feynman 9">Feynman 9</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-10.pdf" title="Feynman 10">Feynman 10</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-11.pdf" title="Feynman 11">Feynman 11</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-12.pdf" title="Feynman 12">Feynman 12</a></li>
+  <li><a href="https://reasonabledeviations.files.wordpress.com/2016/02/feynman-13-14.pdf" title="Feynman 13-14">Feynman 13-14</a></li>
+</ul>
+
+<h3 id="why-chemical-reactions-happen">Why Chemical Reactions Happen</h3>
+
+<p>Link: <a href="../assets/notes/why_chemical_reactions_happen.pdf">Why Chemical Reactions Happen (notes)</a></p>
+
+<p>In January 2015, when I was examining the reading lists for Cambridge and reading example personal statements for Natural Sciences, I noticed that a common denominator was the book <em>Why Chemical Reactions Happen</em>, by Keeler and Wothers. I proceeded to read the first two chapters, and was able to easily follow the physics-based reasoning. I therefore listed it on my UCAS personal statement, with the full intention of reading the whole thing before the interview. However, after the first few chapters, the material becomes rather dense (especially with the focus on MO theory). I did endure through it, and made some notes along the way. The notes are quite verbose, because the book itself is quite succinct anyway. I wasn’t asked anything about the book in my interview, which I suppose is fortunate because I would have probably struggled.</p>
+
+<hr />
+
+<h2 id="miscellaneous-notes">Miscellaneous notes</h2>
+
+<h3 id="the-binomial-theorem">The Binomial Theorem</h3>
+
+<p>Link: <a href="https://reasonabledeviations.files.wordpress.com/2016/02/binomial.pdf" title="Binomial">Notes on the Binomial Theorem</a></p>
+
+<p>An acquaintance of mine was once having trouble wrapping their head around the Binomial Theorem. As someone who likes maths (and likes teaching people maths), I wanted to come up with an intuitive explanation.</p>
+
+<h3 id="ct1-financial-mathematics">CT1 Financial Mathematics</h3>
+
+<p>Link: <a href="../assets/notes/ct1.pdf">Notes on CT1 Financial Mathematics</a></p>
+
+<p>Because I was considering a career as an actuary, I thought it might be interesting to take one of the exams to get a better understanding of the material. Following the ‘study plan’ from the Institute and Faculty of Actuaries, I was torn between CT1 (financial maths) and CT3 (statistics). I decided to choose CT1, because I was already confident with the CT3 content, so I thought that I would learn more from studying CT1.</p>
+
+<p>These notes were made following the free <a href="https://bcgts.wordpress.com/">Warwick notes</a>, which were a sufficient guide for the exams in my opinion.</p>
+
+<h3 id="introduction-to-boosted-trees">Introduction to Boosted Trees</h3>
+
+<p>Link: <a href="../assets/notes/intro_boosted_trees.pdf">Introduction to Boosted trees</a>.</p>
+
+<p>As I have mentioned elsewhere, for a period I became very interested in gradient tree boosting, particularly XGBoost – a review can be found in <a href="../2017/10/10/gradient-tree-boosting/index.html">this post</a>. One of the best expositions of XGBoost was some informal <a href="https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf">slides</a>, made by its creator, Tianqi Chen. I think it’s well worth a little bit of effort to understand XGBoost, because it is a very powerful algorithm.</p>
+
+<h3 id="valuation-workshop">Valuation Workshop</h3>
+
+<p>Link: <a href="../assets/notes/cufis_valuation_workshop.pdf">CUFIS Valuation Workshop</a></p>
+
+<p>In January 2021, I gave a workshop on Investment Valuation to the Cambridge University student investment fund.</p>
+
+</div>
+
+    </div>
+
+  </body>
+  
+  <script src="https://use.fontawesome.com/ba4ba69796.js"></script>
+
+
+<!-- Mirrored from reasonabledeviations.com/Notes/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Mar 2021 15:34:45 GMT -->
+</html>
