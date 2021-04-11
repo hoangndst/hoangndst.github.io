@@ -31,6 +31,7 @@
  *
  * Update the foundational and global aspects of the page.
  */
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
 html {
   font-family: 'Alata', sans-serif;
