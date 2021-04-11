@@ -33,7 +33,7 @@
  */
 
 html {
-  font-family: "Alata", Times, serif;
+  font-family: 'Alata', sans-serif;
   text-align: justify;
   font-display: swap;
 }
@@ -72,7 +72,7 @@ html {
 
 .sidebar {
   text-align: center;
-  font-family: Alata;
+  font-family: 'Alata', sans-serif;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #202020;
@@ -97,7 +97,7 @@ html {
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
-  font-family: "Alata", "Arial", sans-serif;
+  font-family: 'Alata', sans-serif;
   font-size: 2.5rem;
 }
 
