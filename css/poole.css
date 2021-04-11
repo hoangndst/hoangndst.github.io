@@ -33,7 +33,10 @@
  * Update the foundational and global aspects of the page.
  */
  @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
-
+ @font-face {
+  font-family: 'Cascadia';
+  src: url('/css/fonts/Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf');
+}
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -165,7 +168,7 @@ abbr[title] {
 /* Code */
 code,
 pre {
-  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-family: 'Cascadia', Menlo, Monaco, "Courier New", monospace;
 }
 code {
   padding: .25em .5em;

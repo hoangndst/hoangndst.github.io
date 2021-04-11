@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
+@font-face {
+  font-family: 'Cascadia';
+  src: url('/css/fonts/Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf');
+}
+
 html {
   font-family: 'Alata', sans-serif;
   text-align: justify;
