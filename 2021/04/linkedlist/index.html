@@ -20,7 +20,10 @@
     <link rel="stylesheet" href="../../../css/syntax.css">
     <link rel="stylesheet" href="../../../css/hyde.css">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-
+    <link rel="stylesheet" href="/path/to/styles/default.css">
+    <script src="/path/to/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+  
     <!-- Icons -->
     <link rel="shortcut icon" href="../../../assets/techs.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/techs.png">
@@ -240,10 +243,140 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
   <img src="../../../assets/img/linked-list-diagram.png">
 </center>
 
+<p>Bắt đầu với cấu trúc đơn giản nhất</p>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  struct Node {
+    int value; // Value of Node
+    Node *next; // Pointer to next Node
+  };
+</code></pre></div></div>
 
+<p>Trong hàm main ta khai báo như sau:</p>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  Node *one = new Node();
+  Node *two = new Node();
+  Node *three = new Node();
+  // Set one is head
+  Node *head = one;
+  
+  // Set value
+  one->value = 1;
+  two->value = 2;
+  three->value = 3;
+
+  // Link
+  one->next = two;
+  two->next = three;
+  // head -> next -> next
+  // one -> two -> three
+</code></pre></div></div>
 </div>
+
+<p>Như vậy chúng ta đã có một list. Giờ chúng ta muốn thêm một phần tử zero vào một vị trí bất kì thì làm thế nào?</p>
+<p>1. Thêm ở đầu</p>
+
+<center>
+  <img src="../../../assets/img/Linkedlist_insert_at_start.png">
+</center>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>
+  void addhead(int value, Node **head) {
+    Node *new_head = new Node(); // Create new Node
+    new_head->value = value; // set new Node value
+    new_head->next = *head; // set next of new Node is head
+    *head = new_head; // set head is new Node
+  }
+</code></pre></div></div>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  Node *one = new Node();
+  Node *two = new Node();
+  Node *three = new Node();
+  // Set one is head
+  Node *head = one;
+  
+  // Set value
+  one->value = 1;
+  two->value = 2;
+  three->value = 3;
+
+  // Link
+  one->next = two;
+  two->next = three;
+  // head -> next -> next
+  // one -> two -> three
+
+  addhead(0, &head); // set head->value = 0
+  cout << head->value; // head->value = 0 
+</code></pre></div></div>
+<p>Cho những bạn chưa hiểu tại sao trong hàm <code>addhead(0, &head)</code>, <code>&head</code> ở đây có nghĩa chúng ta đang cho vào địa trỉ của một biến con trỏ.</p>
+<p>Trong hàm chúng ta thực hiện thay đổi giá trị tại địa trỉ đó chính là con trỏ trỏ tới head.</p>
+<p>2. Thêm sau một vị trí cho trước</p>
+<center>
+  <img src="../../../assets/img/Linkedlist_insert_middle.png">
+</center>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void insertAfter(Node *index, int value) {
+    if (index == NULL) return; // check index
+    Node *new_node = new Node();
+    new_node->value = value;
+    new_node->next = index->next; // set new_node next is index->next (Link)
+    index->next = new_node;
+  }
+
+</code></pre></div></div>
+<p>Phần này khá dễ hiểu mọi người hãy nhìn hình minh họa nguồn GFG</p>
+<p>3. Thêm vào đuôi</p>
+<center>
+  <img src="../../../assets/img/Linkedlist_insert_last.png">
+</center>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void append(Node **head, int value) {
+    Node *new_end = new Node();
+    new_end->value = value; 
+    new_end->next = NULL; // have to
+    if (*head == NULL) {
+      *head = new_end; 
+      return;
+    }
+    // if list is empty set head is new_end and return; to break out
+    Node *tmp = *head;
+    while(tmp) {
+        tmp = tmp->next; // move tmp to the end
+    }
+    tmp->next = new_end; // add new_end to tmp->next ez right?
+  }
+</code></pre></div></div>
+
+<p>Tương tự trên thì <code>&head</code> bạn chỉ cần hiểu đơn gian là địa trỉ của một con trỏ trỏ để head</p>
+
+<p>4. Test</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void printlist(Node *node) {
+    while(node) {
+        cout << node->value << " ";
+        node = node->next;
+    }
+  }
+
+int main() {
+    
+    Node *head = NULL;
+    append(&head, 0); // 0
+    append(&head, 2); // 0 2
+    insertAfter(head, 1); // 0 1 2
+    append(&head, 3); // 0 1 2 3
+    printlist(head);
+    
+    return 0;
+}
+
+</code></pre></div></div>
+<p>Test thử tại máy bạn để xem kết quả!</p>
+
+
+
 
 <div class="related">
   <h3>Related Posts</h3>
