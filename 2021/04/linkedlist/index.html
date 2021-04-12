@@ -311,7 +311,8 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
   cout << head->value; // head->value = 0 
 </code></pre></div></div>
 <p>Cho những bạn chưa hiểu tại sao trong hàm <code>addhead(0, &head)</code>, <code>&head</code> ở đây có nghĩa chúng ta đang cho vào địa trỉ của một biến con trỏ.</p>
-<p>Trong hàm chúng ta thực hiện thay đổi giá trị tại địa trỉ đó chính là con trỏ trỏ tới head.</p>
+<p>Chúng ta đưa vào địa trỉ để thay đổi giá trị nó, cái này gọi là tham chiếu, còn nếu là <code>Node *head</code> thì chỉ truyền vào giá trị, ta không thay đổi được sau khi kết thúc hàm, đó gọi là tham trị.</p>
+<br>
 <p>2. Thêm sau một vị trí cho trước</p>
 <center>
   <img src="../../../assets/img/Linkedlist_insert_middle.png">
@@ -321,12 +322,14 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
     if (index == NULL) return; // check index
     Node *new_node = new Node();
     new_node->value = value;
-    new_node->next = index->next; // set new_node next is index->next (Link)
+    new_node->next = index->next; 
+    // set new_node next is index->next (Link)
     index->next = new_node;
   }
 
 </code></pre></div></div>
 <p>Phần này khá dễ hiểu mọi người hãy nhìn hình minh họa nguồn GFG</p>
+<br>
 <p>3. Thêm vào đuôi</p>
 <center>
   <img src="../../../assets/img/Linkedlist_insert_last.png">
@@ -345,12 +348,13 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
     while(tmp) {
         tmp = tmp->next; // move tmp to the end
     }
-    tmp->next = new_end; // add new_end to tmp->next ez right?
+    tmp->next = new_end; 
+    // add new_end to tmp->next ez right?
   }
 </code></pre></div></div>
 
 <p>Tương tự trên thì <code>&head</code> bạn chỉ cần hiểu đơn gian là địa trỉ của một con trỏ trỏ để head</p>
-
+<br>
 <p>4. Test</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
   void printlist(Node *node) {
@@ -374,9 +378,162 @@ int main() {
 
 </code></pre></div></div>
 <p>Test thử tại máy bạn để xem kết quả!</p>
+<br>
+<p>5. Xóa phần tử có giá trị bằng x</p>
+<p>Cho một linked list chúng ta hay xóa phần tử có value = x</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void delete_value(Node **head, int x) {
+    Node *tmp = *head;
+    Node *prev = NULL;
+    if (tmp == NULL) return;
+    // break if list == NULL
+    if (tmp->value == x) {
+      head = tmp->next;
+      delete tmp;
+      // free tmp
+    }
+    else {
+      while (tmp->value != x) {
+        prev = tmp;
+        tmp = tmp->next;
+      }
+      if (tmp == NULL) return;
+      prev->next = tmp->next;
+      delete tmp;
+    }
+  }
 
+</code></pre></div></div>
+<br>
+<p>6. Xóa phần tử tại vị trí cho trước</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void delete_pos(Node **head, int pos) {
+    Node *tmp = *head;
+    if (tmp == NULL) return;
+    if (pos == 0) {
+        *head = tmp->next;
+        delete tmp;
+        return;
+    }
+    pos = pos - 1;
+    for (int i = 0; i < pos; i++) {
+        tmp = tmp->next;
+    }
+    Node *aft = tmp->next->next;
+    delete tmp->next;
+    tmp->next = aft;
+  }
+</code></pre></div></div>
+<p>Xem hoạt ảnh sau để có thể dễ dàng hiểu:</p>
+<center>
+  <img src="../../../assets/img/deleteposvisual.gif">
+</center>
+<br>
+<p>7. Xóa một linked list?</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void delete_list (Node **head) {
+    Node *curr = *head;
+    Node *next = NULL;
+    while (curr) {
+        next = curr->next;
+        delete curr;
+        curr = next;
+    }
+    *head = NULL;
+  }
 
+</code></pre></div></div>
+<br>
+<p>8. Tìm độ dài của list</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  int list_len(Node *head) {
+    int len = 0;
+    Node *tmp = head;
+    while (tmp) {
+        tmp = tmp->next;
+        len++;
+    }
+    return len;
+  }
+</code></pre></div></div>
+<p>Ở đây chúng ta chỉ cần xét giá trị không cần thiết phài <code>Node **head</code> để truy đến địa trỉ, chúng ta chỉ cần biến đếm và không cần thay đổi giá trị gì cả :D!</p>
+<br>
+<p>9. Check xem trong list có giá trị nào bằng x không:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  bool search(Node *head, int value) {
+    Node *tmp = head;
+    while(tmp) {
+        if (tmp->value == value) return true;
+        tmp = tmp->next;
+    }
+    return false;
+  }
+</code></pre></div></div>
+<p>Tương tự như trên, ta chả cần thay đổi giá trị hay gì cả nên chỉ cần truyền tham trị.</p>
+<br>
+<p>10. Lấy giá trị tại vị trí cho trước</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  int getNth(Node *head, int index) {
+    Node *tmp = head;
+    int len = list_len(head);
+    if (index > len) return -1;
+    while (index--) {
+        tmp = tmp->next;
+    }
+    return tmp->value;
+  }
+</code></pre></div></div>
+<p>Đầu tiên check xem index có nằm ngoài độ dài không? Nếu thỏa mãn, cho tmp chạy đến vị trí index rồi trả về giá trị tại đó.</p>
+<br>
+<p>11. Tìm độ dài của loop trong linked list</p>
+<center>
+  <img src="../../../assets/img/linkedlist-loop-detect.png">
+</center>
+<p>Đầu tiên hay tìm hiểu cách kiểm tra xem có loop trong linked list hay không?</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  bool loopDetec(Node *head) {
+    Node *fast = head;
+    Node *slow = head;
+    while (fast && slow && fast->next) {
+      slow = slow->next;
+      fast = fast->next->next;
+      if (fast == last) return true;
+    }
+    return false;
+  }
+</code></pre></div></div>
+<p>Ta cho <code>slow, fast</code> chạy cho đến khi hai con trỏ bằng nhau thì chứng tỏ có loop. Dễ hiểu đúng không?</p>
+<p>Chúng ta đã có cách kiểm tra và biết vị trí loop chính là tại <code>slow || fast</code> tại thời điểm nó bằng nhau. Giờ hay tiếp với hàm tìm độ dài của loop này.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  int countfrom(Node *index) {
+    int len = 1;
+    Node *tmp = index;
+    while (tmp->next != index) {
+      len++;
+      tmp = tmp->next;
+    }
+    return len;
+  }
+</code></pre></div></div>
+<p>Hàm trên là hàm đếm độ dài và input là con trỏ tại vị trí có loop, tức là vị trí <code>end->next</code>, đã đi đến đây thì bạn sẽ dễ dàng hiểu được hàm.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  int countLoop(Node *head) {
+    Node *slow = head;
+    Node *fast = head;
+    while (slow && fast && fast->next) {
+      slow = slow->next;
+      fast = fast->next->next;
+      if (fast == slow) {
+        return countfrom(slow);
+        // or return countfrom(fast);
+      }
+    }
+    return 0;
+  }
+</code></pre></div></div>
+<p>Dựa vào cách kiểm tra loop thì ta viết hàm <code>countLoop</code>.</p>
 
+<p>Còn tiếp...!</p>
 
 <div class="related">
   <h3>Related Posts</h3>
