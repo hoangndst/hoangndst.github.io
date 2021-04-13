@@ -532,6 +532,29 @@ int main() {
   }
 </code></pre></div></div>
 <p>Dựa vào cách kiểm tra loop thì ta viết hàm <code>countLoop</code>.</p>
+<br><br />
+<p>12. Xóa phần tử lặp của một List chưa được sắp xếp:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  void removeDuplicates (Node **head) {
+    Node *curr = *head;
+    Node *prev = NULL;
+    unordered_set<int> set;
+    while (curr) {
+        if (set.find(curr->value) != set.end()) {
+            prev->next = curr->next;
+            delete curr;
+        } else {
+            set.insert(curr->value);
+            prev = curr;
+        }
+        curr = prev->next;
+    }   
+  }
+</code></pre></div></div>
+<p>Ta sẽ sử dụng <code>Hashing</code> để có thể có độ phức tạp là <code>O(n)</code>.</p>
+
+
+
 
 <p>Còn tiếp...!</p>
 
