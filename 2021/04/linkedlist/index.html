@@ -554,22 +554,41 @@ int main() {
   void removeDuplicates (Node **head) {
     Node *curr = *head;
     Node *prev = NULL;
-    unordered_set<int> set;
+    unordered_set&lt;int&gt; set;
     while (curr) {
-        if (set.find(curr->value) != set.end()) {
-            prev->next = curr->next;
+        if (set.find(curr-&gt;value) != set.end()) {
+            prev-&gt;next = curr-&gt;next;
             delete curr;
         } else {
-            set.insert(curr->value);
+            set.insert(curr-&gt;value);
             prev = curr;
         }
-        curr = prev->next;
+        curr = prev-&gt;next;
     }   
   }
 </code></pre></div></div>
 <p>Ta sẽ sử dụng <code>Hashing</code> để có thể có độ phức tạp là <code>O(n)</code>.</p>
-
-
+<br><br />
+<p>13. Intersection of Two Linked Lists (LeetCode) | Giao điểm của hai danh sách được liên kết.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  Node *getIntersectionNode (Node *headA, Node *headB) {
+    set&lt;Node *&gt;set;
+    Node *a = headA;
+    Node *b = headB;
+    while(a) {
+        set.insert(a);
+        a = a-&gt;next;
+    }
+    while(b) {
+        if (set.find(b) != set.end()) {
+            return b;
+        } else {
+            b = b-&gt;next;
+        }
+    }
+    return NULL;
+}
+</code></pre></div></div>
 
 
 <p>Còn tiếp...!</p>
