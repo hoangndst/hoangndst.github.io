@@ -246,8 +246,7 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 
 </ul>
 
-<br>
-
+<br><br />
 <p>Tóm tắt nội dung— Bài toán phân cụm có nhiệm vụ phân
     chia một tập hợp các đối tượng (còn gọi là các thành viên) thành
     các nhóm khác nhau (gọi là các cụm) dựa trên các đặc điểm
@@ -257,7 +256,7 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
     toán K-Means dưới góc độ toán học và quá trình tạo lên nó từ
     thư viện SDL2 và ngôn ngữ C++, Python và Pygame cũng tương tự chỉ khác về function.</p>
 
-    <br>
+    <br><br />
 <p>1. Giới thiệu</p>
 <p>Bài toán phân cụm có nhiều ứng dụng khác nhau: khai
     thác dữ liệu học máy và khám phá kiến thức, nén dữ
@@ -280,13 +279,13 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
     <img src="../../../assets/img/f2 (1).png">
     <p>Hình 2. Các đối sau khi được chia nhóm</p>
 </center>
-<br>
+<br><br />
 <p>2. Giải thích thuật toán và Source Code</p>
 
 <p>Thuật toán nhận vào một tập hợp:</p>
 
 \[X = \left[x_{1}, x_{2}, ... , x_{n}\right] \in \mathbf{R} ^{d.n}  \]
-
+<br><br />
 <p>$d$ là chiều của mỗi vector, $n$ là số vector. Cuối cùng nhận đầu vào  $K$ là số nhóm muốn chia.</p>
 <p>Thuật toán sẽ xuất ra K điểm trung tâm $\left[m_{1}, m_{2}, ..., m_{K}\right] \in \mathbf{R} ^{d.K}$  của K nhóm và gắn mác(nhãn, nhóm thuộc về) cho từng điểm đầu vào.</p>
 <p>Thuật toán có thể áp dụng cho tập hợp các dữ liệu vector nhiều chiều, vì phần mêm mô phỏng trên mặt phẳng $Oxy$ hai chiều nên bài viết sẽ nói về hai chiều để có một cách tiếp cận dễ nhất, đối với nhiều chiều các bước làm cũng tương tự.</p>
@@ -294,31 +293,121 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 <p>Bước đầu chúng ta cần tạo một mảng, vector hai chiều để lưu trữ các điểm đầu vào, sau đó sẽ nhận vào vị trí của chuột và input vào mảng, vector hai chiều đó.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    vector<vector<double>> points;
-        ...
-    while(window.isRunning) {
-            ...
-            
-        int mouse_x, mouse_y;
-        SDL_GetMouseState(&mouse_x, &mouse_y);
-            
-           ...
-        if (event.type == SDL_MOUSEBUTTONDOWN) {
-            if ([mouse in points space]) {
-                labels.clear();
-                vector<double> tmp; 
-                int x = mouse_x - 11; // nhan vao toa do x
-                int y = mouse_y - 11; // nhan vao toa do y
-                tmp.push_back(x); 
-                tmp.push_back(y);
-                points.push_back(tmp);
-                tmp.clear();
-            }
-        }
-    }
+  vector&lt;vector&lt;double&gt;&gt; points;
+  ...
+  while(window.isRunning) {
+  ...
+      
+  int mouse_x, mouse_y;
+  SDL_GetMouseState(&amp;mouse_x, &amp;mouse_y); 
+  ...
+  if (event.type == SDL_MOUSEBUTTONDOWN) {
+      if ([mouse in points space]) {
+          labels.clear();
+          vector&lt;double&gt; tmp; 
+          int x = mouse_x - 11; // nhan vao toa do x
+          int y = mouse_y - 11; // nhan vao toa do y
+          tmp.push_back(x); 
+          tmp.push_back(y);
+          points.push_back(tmp);
+          tmp.clear();
+      }
+  }
+}
 </code></pre></div></div>
+<br><br />
 <p>Bước tiếp theo chúng ta sẽ khai báo và nhận đầu vào K, và tạo một mảng, vector hai chiều rồi random ra K điểm có tọa độ $(x, y)$ bất kỳ và nhập nó vào trong mảng, vector hai chiều vừa tạo. </p>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  #include &lt;time.h&gt; // ham random
+  int K = 0;
+  vector&lt;vector&lt;double&gt;&gt; clusters;
+  ...
+  while(window.isRunning()) {
+          ...
+          
+      if ([mouse in random space]) {
+          clusters.clear(); // make sure = []
+          labels.clear();
+          for (int i = 0; i &lt; K; i++) {
+              // random 10 &lt; r1 &lt; 1178 - 10
+              // random 10 &lt; r2 &lt; 598 - 10
+              int r1 = 10 + rand() % (1178 - 10 + 1 - 10);
+              int r2 = 10 + rand() % (598 - 10 + 1 - 10);
+              vector&lt;double&gt; rand;
+              rand.push_back(r1);
+              rand.push_back(r2);
+              clusters.push_back(rand);
+              rand.clear();
+          }
+          cerr &lt;&lt; &quot;Random exc&quot; &lt;&lt; endl;
+      }
+  }
+</code></pre></div></div>
+<br><br />
+<p>Bước tiếp theo là chạy thuật toán. Nói một cách đơn giản chúng ta đang có $points = [p_{1}, p_{2}, ..., p_{n}] \in  \mathbf{R} ^{2.n}$ là tập hợp các điểm ta nhấp lên màn hình. $clusters = [c_{1}, c_{2}, ... , c_{K}] \in \mathbf{R}^{2.K} $ là số  điểm mà chúng ta vừa random. Bây giờ chúng ta sẽ tính khoảng cách của từng điểm trong $points$ tới các điểm trong $clusters$ rồi lưu nó vào một list mới $distancetocl$. \[distancetocl = \left[d_{1}, d_{2}, ..., d_{K}\right] \in \mathbf{R}^{2.K}\]</p>
+<p>Sau khi có list $distancetocl$ ta sẽ tìm ra (giá trị nhỏ nhất) khoảng cách nhỏ nhất của điểm đầu (points[0]) đến từng điểm trong $clusters$ ghi nhớ vị trí (index) của nó rồi lưu vào list $labels$. Tiếp tục tính tương tự đối với các phần tử tiếp theo trong list $points$.</p>
+  \[labels = [l_{1}, l_{2}, ..., l_{n}] \in \mathbf{R} ^{1.n}\]
+<p>Mỗi giá trị trong $labels$ sẽ đánh dấu các điểm K </p>
+<p> Múc đích của việc này là đẻ gắn nhãn cho các điểm.</p>
+<br><br />
+<p>Giờ hãy khai báo mảng và tạo hàm tính khoảng cách:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  double dis(vector&lt;double&gt; vect1, vector&lt;double&gt; vect2) {
+    return double(sqrt(pow((vect1[0] - vect2[0]), 2) + pow((vect1[1] - vect2[1]), 2)));
+  }
+</code></pre></div></div>
+<center>
+  <p> Hàm tính khoảng cách</p>
+</center>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  if ([mouse in run space]) {
+    // change points color
+    labels.clear();
+    for (int i = 0; i &lt; points.size(); i++) {
+        vector&lt;double&gt; distance_to_cl;
+        for (int j = 0; j &lt; clusters.size(); j++) {
+            double tmp1 = dis(points[i], clusters[j]);
+            distance_to_cl.push_back(tmp1);
+        }
+            double min_dis = *min_element(distance_to_cl.begin(), distance_to_cl.end());
+            labels.push_back(getIndex(distance_to_cl, min_dis));
+    }
+    ...
+  }
+</code></pre></div></div>
+<center>
+  <p>Chạy thuật toán</p>
+</center>
+<br><br />
+<p>Tiếp theo chúng ta sẽ cập nhật tọa độ của từng điểm K trong $clusters$, cứ tiếp tục vòng lặp cho đến khi phân chia được kết quả</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  ...
+  // change clusters pos
+ for (int i = 0; i &lt; clusters.size(); i++) {
+     double sum_x = 0;
+     double sum_y = 0;
+     double count = 0;
+     for (int j = 0; j &lt; points.size(); j++) {
+         if (labels[j] == i) {
+             sum_x = sum_x + points[j][0];
+             sum_y = sum_y + points[j][1];
+             count = count + 1;
+         }
+     }
+     if (count != 0) {
+         clusters[i][0] = sum_x/count;
+         clusters[i][1] = sum_y/count;
+     }
+ }
+ ...
+</code></pre></div></div>
+
+<p>Tọa độ mới của từng điểm K là trung bình cộng của các điểm trong $points$ được gán vào nhóm K đó. Sau khi có vị trí K mới ta sẽ cập nhật lại cho đến khi vị trí của K được cố định</p>
+
+<br>
+<a href="https://github.com/hoangndst/kmeans-visualization-cpp/blob/master/report/report.pdf"><code>PDF version</code></a>
+<br>
 
 
 
