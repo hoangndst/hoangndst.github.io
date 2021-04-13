@@ -503,6 +503,22 @@ int main() {
   }
 </code></pre></div></div>
 <p>Ta cho <code>slow, fast</code> chạy cho đến khi hai con trỏ bằng nhau thì chứng tỏ có loop. Dễ hiểu đúng không?</p>
+<p>Còn một cách nữa là sử dụng <code>set</code>:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  bool loopDetec(Node *head) {
+    Node *tmp = head;
+    set&lt;Node*&gt; set;
+    while(tmp) {
+        if(set.find(tmp) != set.end()) {
+            return true;
+        } else {
+            set.insert(tmp);
+        }
+        tmp = tmp-&gt;next;
+    }
+    return false;
+  }
+</code></pre></div></div>
 <p>Chúng ta đã có cách kiểm tra và biết vị trí loop chính là tại <code>slow || fast</code> tại thời điểm nó bằng nhau. Giờ hay tiếp với hàm tìm độ dài của loop này.</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
   int countfrom(Node *index) {
