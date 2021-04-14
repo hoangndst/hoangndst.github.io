@@ -589,7 +589,44 @@ int main() {
     return NULL;
 }
 </code></pre></div></div>
-
+<br><br />
+<p>14. Reverse Linked Lists (LeetCode) | Đảo ngược dslk.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    Node *reverseList(Node **head) {
+        Node *curr = *head;
+        Node *prev = NULL;
+        while(curr) {
+            Node *tmp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = tmp;
+        }
+        return prev;
+    }
+</code></pre></div></div>
+<ul>
+  <li>Time complexity : <code>O(n)</code>. Assume that nn is the list's length, the time complexity is <code>O(n)</code>.</li>
+  <li>Space complexity : <code>O(1)</code>.</li>
+</ul>
+<br><br />
+<p>15. Remove Elements (LeetCode):</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    Node *removeElements(Node **head, int value) {
+        Node *curr = head;
+        Node *prev = new Node();
+        prev->next = head; 
+        // prev slower than curr 1 step
+        while(curr) {
+            if(curr->value == value) {
+                prev->next = curr->next;
+            } else {
+                prev = prev->next;
+            }
+            curr = curr->next;
+        }
+        return *head;
+    }
+</code></pre></div></div>
 
 <p>Còn tiếp...!</p>
 
