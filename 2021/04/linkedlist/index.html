@@ -627,6 +627,29 @@ int main() {
         return *head;
     }
 </code></pre></div></div>
+<br> <br />
+<p>16. Odd Even Linked List (LeetCode)</p>
+<center>
+  <img src="../../../assets/img/328_Odd_Even.svg">
+  <p>Nguồn: LeetCode</p>
+</center>
+<p>Ở đây bài toán mặc định phần tử đầu tiên là lẻ, phần tử thứ hai là chẵn, ta sẽ giải quyết theo hướng chia ra làm hai list rồi nối chúng lại với nhau.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  Node *oddevenList(Node **head) {
+    Node *odd = *head;
+    Node *even = odd->next;
+    Node *evenHead = even;
+    while(even && even->next) {
+        odd->next = even->next;
+        odd = odd->next;
+        even->next = odd->next;
+        even = even->next;
+    }
+    odd->next = evenHead;
+    return *head;
+}
+
+</code></pre></div></div>
 
 <p>Còn tiếp...!</p>
 
