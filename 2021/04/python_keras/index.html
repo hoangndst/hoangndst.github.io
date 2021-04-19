@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
     <title>
-        Linear Regression &middot; Supervised Learning
+        Python, Tensorflow and Keras
     </title>
     
     <!-- CSS -->
@@ -226,101 +226,37 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 
     <div class="content container">
       <div class="post">
-  <h1 align="center" class="post-title">Linear Regression - Supervised Learning</h1>
+  <h1 align="center" class="post-title">Python, Tensorflow and Keras</h1>
   
   <div>
       <!-- Snippet to calculate reading time assuming WPM 200 -->
 <span style="display: inline" class="post-date" title="Estimated read time">
-    14.04.2021 &middot; @arch-techs
+    19.04.2021 &middot; @arch-techs
 </span>
   </div>
   <br>
+<p>1. Mạng Neural là gì?</p>
 <center>
-    <img src="../../../assets/img/linear_regression.png">
+    <img src="../../../assets/img/ArchitecturalMultilayerPerceptron.png">
 </center>
-<p>Bài toán như sau: Cho các điểm như hình vẽ trên (data), trục $x$ biểu diễn cho diện tích từng căn hộ, trục $y$ biểu diễn cho giá của từng căn, bài toán đặt ra chúng ta sẽ được cho trước diện tích của một căn và dự đoán giá của nó. Chúng ta cần đi tìm một phương trình có thể là đường thằng hoặc đường cong gần nhất đi qua các điểm dữ liệu đã cho.</p>
-<p>Blog này sẽ đi theo một hướng đơn giản nhất có thể nhưng vẫn đảm bảo nội dung của Linear Regression.</p>
-<p>Đầu tiên xét hai tập sau:</p>
-\[X = [x_{1}, x_{2}, ... , x_{n}] \]
-\[Y = [y_{1}, y_{2}, ... , y_{n}] \]
-<p>Chúng ta cần tìm $a$ và $b$ để có phương trình:</p>
-\[ Y \approx  aX + b\]
-<p>Viết theo hệ phương trình:</p>
-\[y_{1} = ax_{1} + b \]
-\[y_{2} = ax_{2} + b \]
-\[ \vdots \]
-\[y_{n} = ax_{n} + b \]
-<p>Hệ phương trình 2 ẩn $a$, $b$ mà có nhiều hơn 2 phương trình, vì sao? Vì chúng ra đang tìm ra $a$, $b$ để có phương trình $Y = aX + b$ có đường thẳng này có thể đi gần nhất với tất cả các điểm tức là tổng khoảng cách của các điểm đến đường thằng là nhỏ nhất.</p>
-\[
-\begin{bmatrix}
-y_{1}\\ 
-y_{2}\\
-\vdots \\  
-y_{n}
-\end{bmatrix} 
-\approx
-a 
-\begin{bmatrix}
-x_{1}\\ 
-x_{2}\\
-\vdots \\  
-x_{n}
-\end{bmatrix} 
-+
-b
-\begin{bmatrix}
-1\\ 
-1\\
-\vdots \\  
-1
-\end{bmatrix} 
-\]
-<p>Bên trên chỉ là lời giới thiệu tổng quát, để có thể dễ dàng hiểu, chúng ta hay đi vào ví dụ cụ thể, từ đó bạn sẽ dễ dàng tiếp cận nó hơn </p>
-<p>VD: Chúng ta sẽ lấy 3 điểm để dễ dàng tiếp cận.</p>
-\[X = [x_{1}, x_{2}, x_{3}]\]
-\[Y = [y_{1}, y_{2}, y_{3}]\]
+<p>Mạng nơ-ron nhân tạo (Neural Network - NN) là một mô hình lập trình lấy cảm hứng từ mạng nơ-ron thần kinh. Kết hợp với các kĩ thuật học sâu (Deep Learning - DL), NN đang trở thành một công cụ rất mạnh mẽ mang lại hiệu quả tốt nhất cho nhiều bài toán khó như nhận dạng ảnh, giọng nói hay xử lý ngôn ngữ tự nhiên.</p>
+<br />
+<p>2. Tensorflow là gì?</p>
+<center>
+    <img src="../../../assets/img/libraries-hero.svg">
+</center>
+<p>Tensorflow là thư viện mã nguồn mở cho machine learning nổi tiếng nhất thế giới, được phát triển bởi các nhà nghiên cứu từ Google. Việc hỗ trợ mạnh mẽ các phép toán học để tính toán trong machine learning và deep learning đã giúp việc tiếp cận các bài toán trở nên đơn giản, nhanh chóng và tiện lợi hơn nhiều. </p>
+<br />
+<p>3. Keras là gì?</p>
+<center>
+    <img src="../../../assets/img/keras.png">
+</center>
+<p>Keras là một thư viện high level (front-end) với phần low level (back-end) là Tensorflow.</p>
+<p>Cú pháp đơn giản hơn Tensorflow rất nhiều.</p>
+<p>Có thể chạy trên cả CPU, GPU.</p>
+<p>Source: MiAI</p>
 
-\[y_{1} = ax_{1} + b \]
-\[y_{2} = ax_{2} + b \]
-\[y_{3} = ax_{3} + b \]
-\[
-\begin{bmatrix}
-y_{1}\\ 
-y_{2}\\  
-y_{3}
-\end{bmatrix} 
-\approx
-a 
-\begin{bmatrix}
-x_{1}\\ 
-x_{2}\\
-x_{3}
-\end{bmatrix} 
-+
-b
-\begin{bmatrix}
-1\\ 
-1\\ 
-1
-\end{bmatrix} 
-\]
-<p>Xét vế phải $a
-    \begin{bmatrix}
-    x_{1}\\ 
-    x_{2}\\
-    x_{3}
-    \end{bmatrix} 
-    +
-    b
-    \begin{bmatrix}
-    1\\ 
-    1\\ 
-    1
-    \end{bmatrix} 
-    $ là một mặt phẳng:</p>
-<center>
-    <img src="../../../assets/img/lg_1.png">
-</center>
+
 </div>
 
 <div class="related">
