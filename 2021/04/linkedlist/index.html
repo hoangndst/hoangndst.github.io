@@ -245,33 +245,29 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 
 <p>Bắt đầu với cấu trúc đơn giản nhất</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  struct Node {
-    int value; // Value of Node
-    Node *next; // Pointer to next Node
-  };
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="k">struct</span> <span class="nc">Node</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span></code></pre>
 
 <p>Trong hàm main ta khai báo như sau:</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  Node *one = new Node();
-  Node *two = new Node();
-  Node *three = new Node();
-  // Set one is head
-  Node *head = one;
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code">  <span class="n">Node</span> <span class="o">*</span><span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">two</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="c1">// Set one is head</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">one</span><span class="p">;</span>
   
-  // Set value
-  one->value = 1;
-  two->value = 2;
-  three->value = 3;
+  <span class="c1">// Set value</span>
+  <span class="n">one</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">two</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">three</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-  // Link
-  one->next = two;
-  two->next = three;
-  // head -> next -> next
-  // one -> two -> three
-</code></pre></div></div>
+  <span class="c1">// Link</span>
+  <span class="n">one</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">two</span><span class="p">;</span>
+  <span class="n">two</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">three</span><span class="p">;</span>
+  <span class="c1">// head -&gt; next -&gt; next</span>
+  <span class="c1">// one -&gt; two -&gt; three</span></code></pre>
 </div>
 
 <p>Như vậy chúng ta đã có một list. Giờ chúng ta muốn thêm một phần tử zero vào một vị trí bất kì thì làm thế nào?</p>
@@ -280,36 +276,34 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 <center>
   <img src="../../../assets/img/Linkedlist_insert_at_start.png">
 </center>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight">
-<code>
-  void addhead(int value, Node **head) {
-    Node *new_head = new Node(); // Create new Node
-    new_head->value = value; // set new Node value
-    new_head->next = *head; // set next of new Node is head
-    *head = new_head; // set head is new Node
-  }
-</code></pre></div></div>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  Node *one = new Node();
-  Node *two = new Node();
-  Node *three = new Node();
-  // Set one is head
-  Node *head = one;
+ 
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">addhead</span><span class="p">(</span><span class="kt">int</span> <span class="n">data</span><span class="p">,</span> <span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Node</span><span class="o">*</span> <span class="n">new_head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+  <span class="n">new_head</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">new_head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">new_head</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
+
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code">  <span class="n">Node</span> <span class="o">*</span><span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">two</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+  <span class="c1">// Set one is head</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">one</span><span class="p">;</span>
   
-  // Set value
-  one->value = 1;
-  two->value = 2;
-  three->value = 3;
+  <span class="c1">// Set data</span>
+  <span class="n">one</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">two</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">three</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-  // Link
-  one->next = two;
-  two->next = three;
-  // head -> next -> next
-  // one -> two -> three
+  <span class="c1">// Link</span>
+  <span class="n">one</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">two</span><span class="p">;</span>
+  <span class="n">two</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">three</span><span class="p">;</span>
+  <span class="c1">// head -&gt; next -&gt; next</span>
+  <span class="c1">// one -&gt; two -&gt; three</span>
 
-  addhead(0, &head); // set head->value = 0
-  cout << head->value; // head->value = 0 
-</code></pre></div></div>
+  <span class="n">addhead</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">head</span><span class="p">);</span> <span class="c1">// set head-&gt;data = 0</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span> <span class="c1">// head-&gt;data = 0 </span></code></pre>
+
 <p>Cho những bạn chưa hiểu tại sao trong hàm <code>addhead(0, &head)</code>, <code>&head</code> ở đây có nghĩa chúng ta đang cho vào địa trỉ của một biến con trỏ.</p>
 <p>Chúng ta đưa vào địa trỉ để thay đổi giá trị nó, cái này gọi là tham chiếu, còn nếu là <code>Node *head</code> thì chỉ truyền vào giá trị, ta không thay đổi được sau khi kết thúc hàm, đó gọi là tham trị.</p>
 <br>
@@ -317,172 +311,140 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 <center>
   <img src="../../../assets/img/Linkedlist_insert_middle.png">
 </center>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void insertAfter(Node *index, int value) {
-    if (index == NULL) return; // check index
-    Node *new_node = new Node();
-    new_node->value = value;
-    new_node->next = index->next; 
-    // set new_node next is index->next (Link)
-    index->next = new_node;
-  }
-
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">insertAfter</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">new_node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+  <span class="n">new_node</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">index</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="n">index</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 <p>Phần này khá dễ hiểu mọi người hãy nhìn hình minh họa nguồn GFG</p>
 <br>
 <p>3. Thêm vào đuôi</p>
 <center>
   <img src="../../../assets/img/Linkedlist_insert_last.png">
 </center>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void append(Node **head, int value) {
-    Node *new_end = new Node();
-    new_end->value = value; 
-    new_end->next = NULL; // have to
-    if (*head == NULL) {
-      *head = new_end; 
-      return;
-    }
-    // if list is empty set head is new_end and return; to break out
-    Node *tmp = *head;
-    while(tmp) {
-        tmp = tmp->next; // move tmp to the end
-    }
-    tmp->next = new_end; 
-    // add new_end to tmp->next ez right?
-  }
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">append</span><span class="p">(</span><span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">new_node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+  <span class="n">new_node</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">new_node</span><span class="p">;</span>
+      <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 
 <p>Tương tự trên thì <code>&head</code> bạn chỉ cần hiểu đơn gian là địa trỉ của một con trỏ trỏ để head</p>
 <br>
 <p>4. Test</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void printlist(Node *node) {
-    while(node) {
-        cout << node->value << " ";
-        node = node->next;
-    }
-  }
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">printlist</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+      <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-int main() {
-    
-    Node *head = NULL;
-    append(&head, 0); // 0
-    append(&head, 2); // 0 2
-    insertAfter(head, 1); // 0 1 2
-    append(&head, 3); // 0 1 2 3
-    printlist(head);
-    
-    return 0;
-}
-
-</code></pre></div></div>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  
+  <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+  <span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="n">printlist</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 <p>Test thử tại máy bạn để xem kết quả!</p>
 <br>
 <p>5. Xóa phần tử có giá trị bằng x</p>
 <p>Cho một linked list chúng ta hay xóa phần tử có value = x</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void delete_value(Node **head, int x) {
-    Node *tmp = *head;
-    Node *prev = NULL;
-    if (tmp == NULL) return;
-    // break if list == NULL
-    if (tmp->value == x) {
-      head = tmp->next;
-      delete tmp;
-      // free tmp
-    }
-    else {
-      while (tmp->value != x) {
-        prev = tmp;
-        tmp = tmp->next;
-      }
-      if (tmp == NULL) return;
-      prev->next = tmp->next;
-      delete tmp;
-    }
-  }
-
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">delete_value</span><span class="p">(</span><span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="k">delete</span> <span class="n">tmp</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">while</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">!=</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">prev</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+          <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="k">delete</span> <span class="n">tmp</span><span class="p">;</span>
+  <span class="p">}</span>  
+<span class="p">}</span></code></pre>
 <br>
 <p>6. Xóa phần tử tại vị trí cho trước</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void delete_pos(Node **head, int pos) {
-    Node *tmp = *head;
-    if (tmp == NULL) return;
-    if (pos == 0) {
-        *head = tmp->next;
-        delete tmp;
-        return;
-    }
-    pos = pos - 1;
-    for (int i = 0; i < pos; i++) {
-        tmp = tmp->next;
-    }
-    Node *aft = tmp->next->next;
-    delete tmp->next;
-    tmp->next = aft;
-  }
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">delete_pos</span><span class="p">(</span><span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="k">delete</span> <span class="n">tmp</span><span class="p">;</span>
+      <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">pos</span><span class="o">--</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">pos</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">aft</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="k">delete</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">aft</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 <p>Xem hoạt ảnh sau để có thể dễ dàng hiểu:</p>
 <center>
   <img src="../../../assets/img/deleteposvisual.gif">
 </center>
 <br>
 <p>7. Xóa một linked list?</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  void delete_list (Node **head) {
-    Node *curr = *head;
-    Node *next = NULL;
-    while (curr) {
-        next = curr->next;
-        delete curr;
-        curr = next;
-    }
-    *head = NULL;
-  }
-
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">void</span> <span class="nf">delete_list</span><span class="p">(</span><span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">curr</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">next</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="k">delete</span> <span class="n">curr</span><span class="p">;</span>
+      <span class="n">curr</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 <br>
 <p>8. Tìm độ dài của list</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  int list_len(Node *head) {
-    int len = 0;
-    Node *tmp = head;
-    while (tmp) {
-        tmp = tmp->next;
-        len++;
-    }
-    return len;
-  }
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">int</span> <span class="nf">len_list</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+      <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">len</span><span class="p">;</span>
+<span class="p">}</span> </code></pre>
 <p>Ở đây chúng ta chỉ cần xét giá trị không cần thiết phài <code>Node **head</code> để truy đến địa trỉ, chúng ta chỉ cần biến đếm và không cần thay đổi giá trị gì cả :D!</p>
 <br>
 <p>9. Check xem trong list có giá trị nào bằng x không:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  bool search(Node *head, int value) {
-    Node *tmp = head;
-    while(tmp) {
-        if (tmp->value == value) return true;
-        tmp = tmp->next;
-    }
-    return false;
-  }
-</code></pre></div></div>
-<p>Tương tự như trên, ta chả cần thay đổi giá trị hay gì cả nên chỉ cần truyền tham trị.</p>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">bool</span> <span class="nf">find</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
+<p>Tương tự như trên, ta không cần thay đổi giá trị hay gì cả nên chỉ cần truyền tham trị.</p>
 <br>
 <p>10. Lấy giá trị tại vị trí cho trước</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  int getNth(Node *head, int index) {
-    Node *tmp = head;
-    int len = list_len(head);
-    if (index > len) return -1;
-    while (index--) {
-        tmp = tmp->next;
-    }
-    return tmp->value;
-  }
-</code></pre></div></div>
+<pre id="parse_result" class="highlight" data-lang="cpp"><code id="parse_code"><span class="kt">int</span> <span class="nf">getNth</span> <span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">len_list</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">len</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">index</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 <p>Đầu tiên check xem index có nằm ngoài độ dài không? Nếu thỏa mãn, cho tmp chạy đến vị trí index rồi trả về giá trị tại đó.</p>
 <br>
 <p>11. Tìm độ dài của loop trong linked list</p>
