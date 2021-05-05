@@ -268,6 +268,46 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 </span>
 <span class="k">print</span><span class="p">(</span><span class="s">"time: "</span> <span class="o">+</span>  <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span></code></pre>
 <p>Thật dễ để hiểu đúng không?</p>
+<p>Đến với vị dụ tiếp theo:</p>
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># +3
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># phep so sanh i &lt; n ? va phep i++ =&gt; +2
+</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># phep so sanh j &lt; n ? va phep j++ =&gt; +2
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>        <span class="c1"># =&gt; 4n + 2
+# =&gt; (4n + 2)xn
+# =&gt; P(n) = 4n^2 + 2n + 3</span></code></pre>
+<p>$P(n) = 4n^2 + 2n + 3 \sim O(n^2)$</p>
+<p>Đối với đoạn <code>code</code> dưới đây thì sao?</p>
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># +4
+</span><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span> <span class="c1"># phep so sanh +1 
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>    <span class="n">i</span> <span class="o">*=</span> <span class="mi">2</span> <span class="c1"># +1</span></code></pre>
+<p>Do <code>i *= 2</code> nên vòng <code>while</code> không duyệt <code>n</code> lần mà duyệt $\log_{2}(n)$</p>
+<p>Vậy từ đó ta có được $P(n) = 3\log_{2}(n) + 4 \sim O(log_{2}(n))$</p> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 <div class="related">
