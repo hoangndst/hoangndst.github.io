@@ -324,8 +324,40 @@ f’(x) \approx \frac{f(x + \varepsilon) - f(x - \varepsilon)}{2\varepsilon}
 <p>Bạn có thể đọc thêm tại đây: <a target="_blank" href="https://en.wikipedia.org/wiki/Numerical_differentiation" >Numerical Differentiation</a></p>
 
 <p id="23-python-code-for-visualization">2.3 Mô phỏng bằng Python</p>
+<p>Khái quát lại bài toán Linear Regression:</p>
+<p>Đầu tiên xét hai tập sau:</p>
+\[X = [x_{1}, x_{2}, ... , x_{n}] \]
+\[Y = [y_{1}, y_{2}, ... , y_{n}] \]
+<p>Chúng ta cần tìm $a$ và $b$ để có phương trình:</p>
+\[ Y \approx  a + bX\]
+<p>Viết theo cách khác:</p>
+\begin{equation}\tag{4} \label{eq:2.4}
+\begin{bmatrix}
+y_{1}\\ 
+y_{2}\\ 
+\vdots \\
+y_{n}
+\end{bmatrix} =
+\begin{bmatrix}
+1 &  x_{1}\\ 
+1 &  x_{2}\\
+\vdots & \vdots \\ 
+1 & x_{n}
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+a\\ 
+b
+\end{bmatrix}
+\Leftrightarrow Y = Ax
+\end{equation}
+<p>Nhưng không có $a, b$ nào thỏa mãn tạo ra đường thẳng đi qua tất cả các điểm dữ liệu nên ta sẽ tìm $a, b$ sao cho:</p>
+\begin{equation}\tag{5} \label{eq:2.5}
+f(x) = \left \| Ax - Y \right \|^2_{2} \; min
+\end{equation}
 
-
+\begin{equation}\tag{6} \label{eq:2.6}
+f'(x) = 2.A^{T} . \left | Ax - Y \right |
+\end{equation}
 
 </div>
 
