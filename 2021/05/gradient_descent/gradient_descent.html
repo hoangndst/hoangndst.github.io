@@ -237,13 +237,93 @@ document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 </span>
   </div>
   <br>
+  <p>Content:</p>
+
+  <ul>
+    <li><a href="#1-introduction">1. Giới thiệu</a>
+      <ul>
+        <li><a href="#11-why-gradient-descent">1.1. Tại sao chúng ta cần GA?</a></li>
+        <li><a href="#12-methodology">1.2. Phương pháp</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-gradient-descent-for-linear-regression">2. Gradient Descent và Linear Regression</a>
+      <ul>
+        <li><a href="#21-matrix-derivatives">2.1. Đạo hàm ma trận</a></li>
+        <li><a href="#22-numerical-differentiation">2.2. Vi phân số học</a></li>
+        <li><a href="#23-python-code-for-visualization">2.3. Mô phỏng bằng Python</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-discussion">3. Discussion</a>
+      <ul>
+        <li><a href="#31-when-to-stop">3.1. When to stop?</a></li>
+        <li><a href="#32-stucking-in-local-optimum">3.2. Stucking in Local Optimum</a></li>
+        <li><a href="#33-speed-to-convergence-learning-rate">3.3. Speed to convergence (Learning rate)</a></li>
+        <li><a href="#34-disadvantage-compared-to-using-formula">3.4. Disadvantage compared to using formula</a></li>
+        <li><a href="#35-speedup-gd">3.5. Speedup GD</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-reference">4. Reference</a></li>
+  </ul>
+  
+
+
+<p><a name="1-introduction"></a></p>
+<p id="1-introduction">1. Giới thiệu</p>
+<p><a name="11-why-gradient-descent"></a></p>
+<p id="11-why-gradient-descent">1.1. Tại sao chúng ta cần GD?</p>
+
+<p>
 Chúng ta có thể dễ dàng tìm được hàm dự đoạn từ một tập số liệu cho trước nhờ vào công thức của hồi quy tuyến tính (Linear Regression)
 \begin{equation} \tag{1}\label{eq:1}
 \hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}
 \end{equation}
-nhưng do trong đó có một hàm $inverse$ nếu dữ liệu ít và số chiều nhỏ không sao nhưng khi làm việc với những lượng dữ liệu lớn hơn, nhiều chiều hơn thì nó sẽ tốn rất nhiều tài nguyên của máy tính. Vậy nên ta phải sử dụng đến Gradient Descent, một thuật toán cổ điển những vẫn rất phổ biến hiện nay.
+nhưng do trong đó có một hàm $inverse$ nếu dữ liệu ít và số chiều nhỏ không sao nhưng khi làm việc với những lượng dữ liệu lớn hơn, nhiều chiều hơn thì nó sẽ tốn rất nhiều tài nguyên của máy tính. Vậy nên ta phải sử dụng đến Gradient Descent, một thuật toán cổ điển những vẫn rất phổ biến hiện nay.</p>
 
 
+<p>Hay việc tìm cực trị của một hàm số, phương trình $f ′ (x) = 0$ không thể được giải một cách dễ dàng. Trong trường hợp này, chúng ta có thể sử dụng thuật toán gọi gradient descent để tìm giải pháp gần đúng.</p>
+<!-- <p><a name="12-methodology"></a></p> -->
+<p id="12-methodology">1.2 Phương pháp</p>
+<p>Suy giảm độ dốc (còn gọi là giảm độ dốc, tiếng Anh: gradient descent) là một thuật toán tối ưu hóa lặp bậc nhất để tìm một cực trị của một hàm khả vi. Để tìm cực tiểu cục bộ của một hàm sử dụng suy giảm độ dốc, người ta có thể thực hiện các bước tỷ lệ thuận với âm của gradient (hoặc độ dốc xấp xỉ) của hàm tại điểm hiện tại. Nhưng nếu thực hiện các bước tương ứng với dương của gradient thì tiếp cận được một cực đại cục bộ của hàm số đó; phương pháp này được gọi là tăng độ dốc (gradient ascent).</p>
+<p>Cụ thể hơn, GD sẽ thay đổi lặp đi lặp lại giá trị của $x \; (x := x + \beta)$ để trong mỗi lần lặp lại, hy vọng rằng $f (x)$ ngày càng nhỏ hơn và tiến gần đến mức cực tiểu.</p>
+<p>Cách để điều chỉnh $\beta$ và đảm bảo $f(x)$ sẽ giảm là cho $\beta$ bằng một phần âm của gradient: $\beta = -\alpha f'(x)$, trong đó $\alpha$ là một số dương và nó được gọi là <code>learning rate</code>. Cuối cùng ta được:</p>
+
+\begin{equation} \tag{2}\label{eq:2}
+x := x - \alpha f'(x)
+\end{equation}
+
+<p>Theo như hình 1 thì tại điểm $x_{0}$ ta có $f'(x_{0}) < 0 \Rightarrow \alpha f'(x_{0}) < 0 $ có nghĩa là giá trị x sẽ tăng hay tiến về bên phải làm cho giá trị $f(x)$ giảm dần về cực tiểu.</p>
+
+<center>
+  <img src="/assets/img/hambac4.png" width="400">
+  <p>Figure 1</p>
+</center>
+
+<p id="2-gradient-descent-for-linear-regression">2. Gradient Descent và Linear Regression.</p>
+<p>Bây giờ chúng ta hãy đi qua khái niệm đạo hàm ma trận (để làm việc với dữ liệu nhiều chiều) và vi phân số học (để tính toán gradient gần đúng tại một giá trị cụ thể của $x$).</p>
+<p id="21-matrix-derivatives">2.1 Đạo hàm ma trận</p>
+<p>Trong ví dụ trước, $x$ chỉ là vectơ một chiều, nhưng thực tế các bài toán đưa ra $x$ cũng có thể là một vectơ trong không gian n chiều.</p>
+<p>Trong hồi quy tuyến tính thì $x$ là một vector, công thức đạo hàm của nó là:</p>
+\begin{equation}
+\triangledown_x f(x) = \begin{bmatrix}
+\frac{\partial f}{\partial x_{1}}\newline
+ \vdots \newline
+ \frac{\partial f}{\partial x_{m}} 
+\end{bmatrix} 
+\end{equation}
+<p id="22-numerical-differentiation">2.2. Vi phân số học</p>
+
+<p>Theo như vi phân số học chúng ta có thể tính đạo hàm theo \eqref{eq:2.3} với sai số nhỏ so với công thức bình thường \eqref{eq:2.2}.</p>
+
+\begin{equation}\tag{2} \label{eq:2.2}
+f’(x) = \lim_{\varepsilon \rightarrow 0}\frac{f(x + \varepsilon) - f(x)}{\varepsilon}
+\end{equation}
+\begin{equation}\tag{3} \label{eq:2.3}
+f’(x) \approx \frac{f(x + \varepsilon) - f(x - \varepsilon)}{2\varepsilon} 
+\end{equation}
+
+<p>Bạn có thể đọc thêm tại đây: <a target="_blank" href="https://en.wikipedia.org/wiki/Numerical_differentiation" >Numerical Differentiation</a></p>
+
+<p id="23-python-code-for-visualization">2.3 Mô phỏng bằng Python</p>
 
 
 

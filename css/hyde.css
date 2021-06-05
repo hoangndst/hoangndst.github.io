@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap');
 @font-face {
   font-family: 'Cascadia';
   src: url('/css/fonts/Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf');
 }
 
 html {
-  font-family: 'Alata', sans-serif;
+  font-family:'Noto Serif JP','Alata', sans-serif;
   text-align: justify;
   font-display: swap;
 }
 @media (min-width: 48em) {
   html {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 @media (min-width: 58em) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -45,6 +45,7 @@ html {
 
 .sidebar {
   text-align: center;
+  font-size: 20px;
   font-family: 'Alata', sans-serif;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
@@ -118,9 +119,9 @@ a.sidebar-nav-item:focus {
   padding-bottom: 4rem;
 }
 
-@media (min-width: 48em) {
+@media (min-width: 50em) {
   .content {
-    max-width: 38rem;
+    max-width: 52rem;
     margin-left: 20rem;
     margin-right: 2rem;
   }
