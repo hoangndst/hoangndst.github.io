@@ -44,7 +44,7 @@ x_gd = np.linspace(1,46,10000)
 # x_random = np.random.rand(3, 1)
 # print(x_random)
 x_random = np.array([[ -2.1],
-       [ 10.1],
+       [ 5.1],
        [-2.1]])
 fig1 = plt.figure("GD for Linear Regression")
 ax = plt.axes(xlim=(-5,30), ylim=(-5, 50))
