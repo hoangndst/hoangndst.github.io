@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="Description" content="All about technology.">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+        Gradient Descent
+    </title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/poole.css">
+    <link rel="stylesheet" href="../../../css/syntax.css">
+    <link rel="stylesheet" href="../../../css/hyde.css">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/techs.png">
+    <!-- <link rel="manifest" href="/assets/site.webmanifest"> -->
+    <link rel="mask-icon" href="../../../../assets/safari-pinned-tab.svg" color="#41a9c7">
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="../../../assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../atom.xml">
+
+    <!-- Javascript -->
+    
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DEV7XD3S2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1DEV7XD3S2');
+    </script>    
+
+</head>
+
+
+<body class="theme-base-purpz">
+
+  <div class="sidebar">
+<div class="container sidebar-sticky">
+
+  <div class="sidebar-about">
+    <h1>
+      <a href="../../../index.html">
+        Techs Blog
+      </a>
+    </h1>
+    <!-- <p class="lead">Simple Techs</p> -->
+    <p class="lead">@arch-techs</p>
+
+  </div>
+
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item " href="../../../../index.html">Home</a>
+
+      
+
+      
+      
+        
+        
+          
+        
+      
+        
+        
+          
+          
+        
+      
+        
+            
+        
+        
+          
+          
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../../../../about/index.html">About</a>
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+
+      <div class="sidebar-nav-item">
+    
+        <div class="sidebar-nav-item">
+          <p>
+            <a href="https://github.com/hoangndst">
+            Github <i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+            &nbsp;
+            <a href="https://www.linkedin.com/in/nguyendinhhoang252/">
+                LinkedIn <i class="fa fa-linkedin-square" target="_blank"></i>
+            </a>&nbsp;
+            <a href="https://www.facebook.com/techs25/" target="_blank">Facebook <i class="fa fa-facebook" aria-hidden="true"></i></a>
+            &nbsp;
+            <a href="https://www.instagram.com/hoangndst" target="_blank">Instagram
+                <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </p>
+      </div>
+    </nav>
+
+    <p>&copy All rights reserved.</p>
+  </div>
+</div>
+
+<!-- Mailchimp -->
+<script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+<script type="text/javascript">
+function showMailingPopUp() {
+    console.log("showing popup");
+    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us8.list-manage.com","uuid":"31c71a4d79bd53ab3c537a59e","lid":"2416515c90","uniqueMethods":true}) })
+    document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
+
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 align="center" class="post-title">Gradient Descent</h1>
+  
+  <div>
+      <!-- Snippet to calculate reading time assuming WPM 200 -->
+<span style="display: inline" class="post-date" title="Estimated read time">
+    28.05.2021 &middot; @arch-techs
+</span>
+  </div>
+  <br>
+  <p>Content:</p>
+
+  <ul>
+    <li><a href="#1-introduction">1. Giới thiệu</a>
+      <ul>
+        <li><a href="#11-why-gradient-descent">1.1. Tại sao chúng ta cần GA?</a></li>
+        <li><a href="#12-methodology">1.2. Phương pháp</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-gradient-descent-for-linear-regression">2. Gradient Descent và Linear Regression</a>
+      <ul>
+        <li><a href="#21-matrix-derivatives">2.1. Đạo hàm ma trận</a></li>
+        <li><a href="#22-numerical-differentiation">2.2. Vi phân số học</a></li>
+        <li><a href="#23-python-code-for-visualization">2.3. Mô phỏng bằng Python</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-discussion">3. Đi vào cụ thể hơn</a>
+      <ul>
+        <li><a href="#31-when-to-stop">3.1. Khi nào thì dừng lại?</a></li>
+        <li><a href="#32-stucking-in-local-optimum">3.2. Mắc tại các điểm cực trị địa phương </a></li>
+        <li><a href="#33-learning-rate">3.3. Learning rate</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-reference">4. Reference</a></li>
+  </ul>
+  
+
+
+<p><a name="1-introduction"></a></p>
+<p id="1-introduction">1. Giới thiệu</p>
+<p><a name="11-why-gradient-descent"></a></p>
+<p id="11-why-gradient-descent">1.1. Tại sao chúng ta cần GD?</p>
+
+<p>
+Chúng ta có thể dễ dàng tìm được hàm dự đoạn từ một tập số liệu cho trước nhờ vào công thức của hồi quy tuyến tính (Linear Regression)
+\begin{equation} \tag{1}\label{eq:1}
+\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}
+\end{equation}
+nhưng do trong đó có một hàm $inverse$ nếu dữ liệu ít và số chiều nhỏ không sao nhưng khi làm việc với những lượng dữ liệu lớn hơn, nhiều chiều hơn thì nó sẽ tốn rất nhiều tài nguyên của máy tính. Vậy nên ta phải sử dụng đến Gradient Descent, một thuật toán cổ điển những vẫn rất phổ biến hiện nay.</p>
+
+
+<p>Hay việc tìm cực trị của một hàm số, phương trình $f ′ (x) = 0$ không thể được giải một cách dễ dàng. Trong trường hợp này, chúng ta có thể sử dụng thuật toán gọi gradient descent để tìm giải pháp gần đúng.</p>
+<!-- <p><a name="12-methodology"></a></p> -->
+<p id="12-methodology">1.2 Phương pháp</p>
+<p>Suy giảm độ dốc (còn gọi là giảm độ dốc, tiếng Anh: gradient descent) là một thuật toán tối ưu hóa lặp bậc nhất để tìm một cực trị của một hàm khả vi. Để tìm cực tiểu cục bộ của một hàm sử dụng suy giảm độ dốc, người ta có thể thực hiện các bước tỷ lệ thuận với âm của gradient (hoặc độ dốc xấp xỉ) của hàm tại điểm hiện tại. Nhưng nếu thực hiện các bước tương ứng với dương của gradient thì tiếp cận được một cực đại cục bộ của hàm số đó; phương pháp này được gọi là tăng độ dốc (gradient ascent).</p>
+<p>Cụ thể hơn, GD sẽ thay đổi lặp đi lặp lại giá trị của $x \; (x := x + \beta)$ để trong mỗi lần lặp lại, hy vọng rằng $f (x)$ ngày càng nhỏ hơn và tiến gần đến mức cực tiểu.</p>
+<p>Cách để điều chỉnh $\beta$ và đảm bảo $f(x)$ sẽ giảm là cho $\beta$ bằng một phần âm của gradient: $\beta = -\alpha f'(x)$, trong đó $\alpha$ là một số dương và nó được gọi là <code>learning rate</code>. Cuối cùng ta được:</p>
+
+\begin{equation} \tag{2}\label{eq:2}
+x := x - \alpha f'(x)
+\end{equation}
+
+<p>Theo như hình 1 thì tại điểm $x_{0}$ ta có $f'(x_{0}) < 0 \Rightarrow \alpha f'(x_{0}) < 0 $ có nghĩa là giá trị x sẽ tăng hay tiến về bên phải làm cho giá trị $f(x)$ giảm dần về cực tiểu.</p>
+
+<center>
+  <img id="fig1" src="../../../assets/img/hambac4.png" width="400">
+  <p>Figure 1</p>
+</center>
+
+<p id="2-gradient-descent-for-linear-regression">2. Gradient Descent và Linear Regression.</p>
+<p>Bây giờ chúng ta hãy đi qua khái niệm đạo hàm ma trận (để làm việc với dữ liệu nhiều chiều) và vi phân số học (để tính toán gradient gần đúng tại một giá trị cụ thể của $x$).</p>
+<p id="21-matrix-derivatives">2.1 Đạo hàm ma trận</p>
+<p>Trong ví dụ trước, $x$ chỉ là vectơ một chiều, nhưng thực tế các bài toán đưa ra $x$ cũng có thể là một vectơ trong không gian n chiều.</p>
+<p>Trong hồi quy tuyến tính thì $x$ là một vector, công thức đạo hàm của nó là:</p>
+\begin{equation}
+\triangledown_x f(x) = \begin{bmatrix}
+\frac{\partial f}{\partial x_{1}}\newline
+ \vdots \newline
+ \frac{\partial f}{\partial x_{m}} 
+\end{bmatrix} 
+\end{equation}
+<p id="22-numerical-differentiation">2.2. Vi phân số học</p>
+
+<p>Theo như vi phân số học chúng ta có thể tính đạo hàm theo \eqref{eq:2.3} với sai số nhỏ so với công thức bình thường \eqref{eq:2.2}.</p>
+<p>Ta sẽ dùng nó để kiểm tra xem mình đã tính đạo hàm đã đúng chưa.</p>
+\begin{equation}\tag{2} \label{eq:2.2}
+f’(x) = \lim_{\varepsilon \rightarrow 0}\frac{f(x + \varepsilon) - f(x)}{\varepsilon}
+\end{equation}
+\begin{equation}\tag{3} \label{eq:2.3}
+f’(x) \approx \frac{f(x + \varepsilon) - f(x - \varepsilon)}{2\varepsilon} 
+\end{equation}
+
+<p>Bạn có thể đọc thêm tại đây: <a target="_blank" href="https://en.wikipedia.org/wiki/Numerical_differentiation" >Numerical Differentiation</a></p>
+
+<p id="23-python-code-for-visualization">2.3 Mô phỏng bằng Python</p>
+<p>Khái quát lại bài toán Linear Regression:</p>
+<p>Đầu tiên xét hai tập sau:</p>
+\[X = [x_{1}, x_{2}, ... , x_{m}]^{T} \]
+\[Y = [y_{1}, y_{2}, ... , y_{m}]^{T} \]
+<p>Chúng ta cần tìm $a$ và $b$ để có phương trình:</p>
+\[ Y \approx  a + bX\]
+<p>Viết theo cách khác:</p>
+\begin{equation}\tag{4} \label{eq:2.4}
+\begin{bmatrix}
+y_{1}\\ 
+y_{2}\\ 
+\vdots \\
+y_{m}
+\end{bmatrix} \approx
+\begin{bmatrix}
+1 &  x_{1} &  x_{1}^{2} \dotsm & x_{1}^{n - 1}\\ 
+1 &  x_{2} &  x_{2}^{2} \dotsm & x_{2}^{n - 1} \\
+\vdots & \vdots & \vdots & \vdots \\ 
+1 &  x_{m} &  x_{m}^{2} \dotsm & x_{m}^{n - 1}
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+a_{1}\\ 
+a_{2} \\
+\vdots \\
+a_{n}
+\end{bmatrix}
+\\
+
+\\
+
+\Leftrightarrow Y \approx Ax
+\end{equation}
+<p>Nhưng không có $a, b$ nào thỏa mãn tạo ra đường thẳng đi qua tất cả các điểm dữ liệu nên ta sẽ tìm $a, b$ sao cho:</p>
+\begin{equation}\tag{5} \label{eq:2.5}
+f(x) = \left \| Ax - Y \right \|^2_{2} \; min
+\end{equation}
+
+\begin{equation}\tag{6} \label{eq:2.6}
+f'(x) = 2.A^{T} . \left | Ax - Y \right |
+\end{equation}
+<center>
+  <img id="fig2" width="70%" src="../../../assets/img/GA Animation.gif"> 
+  <p>Figure 2: Trường hợp $n = 2$ hay hàm bậc 1</p>
+</center>
+
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">writers</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+</code>
+<code id="parse_code"><span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="mf">0.5</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">grad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">A</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">numerical_grad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-4</span>
+  <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+      <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+      <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+      <span class="n">x1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">eps</span>
+      <span class="n">x2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">eps</span>
+      <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">-</span> <span class="n">cost</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">g</span>
+
+<span class="k">def</span> <span class="nf">check_grad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">grad1</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">grad2</span> <span class="o">=</span> <span class="n">numerical_grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad1</span> <span class="o">-</span> <span class="n">grad2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">:</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"Check grad function!"</span><span class="p">)</span>
+  <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">iteration</span><span class="p">):</span>
+  <span class="n">x_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_init</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iteration</span><span class="p">):</span>
+      <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span><span class="o">*</span><span class="n">grad</span><span class="p">(</span><span class="n">x_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x_init</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-3</span><span class="p">:</span>
+          <span class="k">break</span>
+      <span class="n">x_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x_list</span></code>
+<code id="parse_code">
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">46</span><span class="p">]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">A</span><span class="p">]).</span><span class="n">T</span> <span class="c1"># Ox
+</span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">b</span><span class="p">]).</span><span class="n">T</span> <span class="c1"># Oy
+</span>
+<span class="c1"># Draw data
+</span><span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="s">"GD for Linear Regression"</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">axes</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">)</span>
+
+<span class="c1"># Linear Regression
+</span><span class="n">lr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">x0_gd</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y0_sklearn</span> <span class="o">=</span> <span class="n">lr</span><span class="p">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lr</span><span class="p">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x0_gd</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x0_gd</span><span class="p">,</span> <span class="n">y0_sklearn</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"green"</span><span class="p">)</span>
+
+<span class="c1"># Add one to A
+</span><span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">int8</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">ones</span><span class="p">,</span> <span class="n">A</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Random and plot initial line
+</span><span class="n">x_init</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.</span><span class="p">]])</span> <span class="c1"># (a, b)
+</span><span class="n">y0_init</span> <span class="o">=</span> <span class="n">x_init</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_init</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x0_gd</span> <span class="c1"># y = a + bx
+</span><span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x0_gd</span><span class="p">,</span> <span class="n">y0_init</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"black"</span><span class="p">)</span>
+<span class="c1"># check grad
+</span><span class="n">check_grad</span><span class="p">(</span><span class="n">x_init</span><span class="p">)</span>
+
+<span class="c1"># Run
+</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">x_list</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">x_init</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">iteration</span><span class="p">)</span>
+<span class="c1"># Plot all line
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">)):</span>
+    <span class="n">y0_gd</span> <span class="o">=</span> <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x0_gd</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x0_gd</span><span class="p">,</span> <span class="n">y0_gd</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"black"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span></code>
+<code id="parse_code"><span class="c1"># Draw animation
+</span><span class="n">line</span> <span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">([],[],</span> <span class="n">color</span><span class="o">=</span><span class="s">"blue"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Iteration: {}   Learning rate: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">))</span>
+    <span class="n">y0_gd</span> <span class="o">=</span> <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x0_gd</span>
+    <span class="n">line</span><span class="p">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x0_gd</span><span class="p">,</span> <span class="n">y0_gd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">line</span><span class="p">,</span>
+
+<span class="n">iters</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Legend for plot
+</span><span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">((</span><span class="s">'Data'</span><span class="p">,</span> <span class="s">'Solution by Linear Regression'</span><span class="p">,</span> <span class="s">'Initial Line For GD'</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Gradient Descent"</span><span class="p">)</span>
+<span class="n">line_ani</span> <span class="o">=</span> <span class="n">animation</span><span class="p">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig1</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">iters</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Save animation to gif file
+# Writer = writers['ffmpeg']
+# writer = Writer(fps=15, metadata={'artist': 'Me'}, bitrate=1800)
+</span>
+<span class="c1"># line_ani.save('GA Animation.gif', writer)
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span></code>
+</pre>
+
+<p id="3-discussion">3. Đi vào cụ thể hơn</p>
+<p id="31-when-to-stop">3.1 Khi nào thì dừng lại ?</p>
+<p>Mối liên hệ giữa số lần thay đổi $x$ (Iteration) và giá trị của $f(x)$ (Cost Value) <a href="#fig3">hình 3.a</a>. Ta dễ thấy rằng Cost Value có xu tiệm cận 0 và vẫn ổn định sau lần lặp 50. Việc lặp lại phần còn lại dường như không làm giảm Cost Value nhiều và có thể không cần thiết.</p>
+<p>Dựa vào đó ta có thể đưa ra một <code>threshold</code> tốt để có thể dừng hàm GD lại.</p>
+<center>
+  <img width="70%" id="fig3" src="../../../assets/img/cost_value.png">
+  <p>Figure 3.a: Mối liên hệ giữa cost và iteration</p>
+  <img width="70%" id="fig4" src="../../../assets/img/GA Animation 2.gif">
+  <p>Figure 3.b: Trường hợp $n = 3$ hay hàm bậc 2</p>
+</center>
+<p><a href="#fig4">Hình 3.b</a> khi <code>threshold</code> của giá trị đạo hàm là khoảng $0.02$ ( $|Grad| < 0.02$ ) ta thu được kết quả tương đối tốt so với kết quả từ Linear Regression.</p>
+<p><a href="../gradient_descent/gd2.py"><code>Source Code </code></a><a href="#fig4">hình 3.b</a></p>
+<br />
+<d id="32-stucking-in-local-optimum">3.2. Mắc kẹt tại các điểm cực trị địa phương</d>
+<p>Khi ra random ra $x$ đầu tiên vào chạy, như đã nói trên sẽ tồn tại nhiều điểm cực tiểu, việc random như vậy sẽ khiến ta mắc phải các trường hợp mắc kẹt tại các cực tiểu địa phương không phải cực tiểu toàn cục như <a href="#fig5">hình 4</a> và nhận được một kết quả không tối ưu.
+ Khi làm việc với không gian nhiều chiều thì càng nhiều cực tiểu địa phương.</p>
+
+<center>
+  <img id="fig5" src="../../../assets/img/GA Animation 3.gif">
+  <p>Figure 4: Trường hợp bị mắc kẹt tại điểm cực trị địa phương.</p>
+</center>
+
+<p id="33-learning-rate">3.3. Learning rate</p>
+<p>Learning rate ($\alpha$) là một tham số rất quan trọng. $\alpha$ nhỏ như trong hình 5.a có thể làm chậm GD và có thể làm cho nó rất chậm hội tụ. Mặt khác, $\alpha$ lớn như hình 5.b có thể làm cho GD không thể hội tụ.</p>
+<center>
+  <img id="fig5" width="70%" src="../../../assets/img/learning_rate.png">
+  <p>Figure 5.a: Learning rate quá nhỏ</p>
+  <p>Figure 5.b: Learning rate quá lớn</p>
+</center>
+<p id="4-reference">4. Reference</p>
+
+<ul>
+  <li><a href="https://machinelearningcoban.com/2017/01/12/gradientdescent/">Blog by TiepVu</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Numerical_differentiation">Numerical Differentiation</a></li>
+</ul>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+
+        
+
+    
+  </ul>
+</div>
+
+    </div>
+
+
+
+
+  </body>
+  
+  <script src="https://use.fontawesome.com/ba4ba69796.js"></script>
+
+
+</html>

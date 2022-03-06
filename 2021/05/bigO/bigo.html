@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="Description" content="All about technology.">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+        Độ phức tạp của thuật toán (Big O)
+    </title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/poole.css">
+    <link rel="stylesheet" href="../../../css/syntax.css">
+    <link rel="stylesheet" href="../../../css/hyde.css">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/techs.png">
+    <!-- <link rel="manifest" href="/assets/site.webmanifest"> -->
+    <link rel="mask-icon" href="../../../../assets/safari-pinned-tab.svg" color="#41a9c7">
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="../../../assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../atom.xml">
+
+    <!-- Javascript -->
+    
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DEV7XD3S2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1DEV7XD3S2');
+    </script>    
+
+</head>
+
+
+<body class="theme-base-purpz">
+
+  <div class="sidebar">
+<div class="container sidebar-sticky">
+
+  <div class="sidebar-about">
+    <h1>
+      <a href="../../../index.html">
+        Techs Blog
+      </a>
+    </h1>
+    <!-- <p class="lead">Simple Techs</p> -->
+    <p class="lead">@arch-techs</p>
+
+  </div>
+
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item " href="../../../../index.html">Home</a>
+
+      
+
+      
+      
+        
+        
+          
+        
+      
+        
+        
+          
+          
+        
+      
+        
+            
+        
+        
+          
+          
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../../../../about/index.html">About</a>
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+
+      <div class="sidebar-nav-item">
+    
+        <div class="sidebar-nav-item">
+          <p>
+            <a href="https://github.com/hoangndst">
+            Github <i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+            &nbsp;
+            <a href="https://www.linkedin.com/in/nguyendinhhoang252/">
+                LinkedIn <i class="fa fa-linkedin-square" target="_blank"></i>
+            </a>&nbsp;
+            <a href="https://www.facebook.com/techs25/" target="_blank">Facebook <i class="fa fa-facebook" aria-hidden="true"></i></a>
+            &nbsp;
+            <a href="https://www.instagram.com/hoangndst" target="_blank">Instagram
+                <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </p>
+      </div>
+    </nav>
+
+    <p>&copy All rights reserved.</p>
+  </div>
+</div>
+
+<!-- Mailchimp -->
+<script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+<script type="text/javascript">
+function showMailingPopUp() {
+    console.log("showing popup");
+    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us8.list-manage.com","uuid":"31c71a4d79bd53ab3c537a59e","lid":"2416515c90","uniqueMethods":true}) })
+    document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
+
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 align="center" class="post-title">Giới thiệu độ phức tạp của thuật toán Big O</h1>
+  
+  <div>
+      <!-- Snippet to calculate reading time assuming WPM 200 -->
+<span style="display: inline" class="post-date" title="Estimated read time">
+    04.05.2021 &middot; @arch-techs
+</span>
+  </div>
+  <br>
+<p>Tại sao phải tối ưu hóa độ phức tạp của thuật toán?</p>
+<center>
+    <img src="../../../assets/img/comalgo.png" width="700">
+</center>
+<p>Đơn giản vì độ phức tạp thấp thì sản phẩm của bạn sẽ chạy mượt mà hơn.</p>
+<p>Độ phức tạp của thuật toán phụ thuộc vào mối quan hệ giữa số lượng phép tính cần thực hiện và số lượng đầu vào của hàm số.</p>
+
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"time: "</span> <span class="o">+</span>  <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</code></pre>
+<p>Đối với đoạn code trên thì $P(n) = 3n + 2 \sim O(n)$</p>
+<p>Tại sao lại tính được như vậy? </p>
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># phep gan +1
+</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="c1"># phep gan +1
+</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span> <span class="c1"># phep so sanh +1
+    </span><span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># +1
+    </span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># +1
+</span>
+<span class="c1"># while n buoc -&gt; (1+1+1)xn = 3n -&gt; 3n + 2
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"time: "</span> <span class="o">+</span>  <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span></code></pre>
+<p>Thật dễ để hiểu đúng không?</p>
+<p>Đến với vị dụ tiếp theo:</p>
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># +3
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># phep so sanh i &lt; n ? va phep i++ =&gt; +2
+</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># phep so sanh j &lt; n ? va phep j++ =&gt; +2
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>        <span class="c1"># =&gt; 4n + 2
+# =&gt; (4n + 2)xn
+# =&gt; P(n) = 4n^2 + 2n + 3</span></code></pre>
+<p>$P(n) = 4n^2 + 2n + 3 \sim O(n^2)$</p>
+<p>Đối với đoạn <code>code</code> dưới đây thì sao?</p>
+<pre id="parse_result" class="highlight" data-lang="python"><code id="parse_code"><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># +4
+</span><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span> <span class="c1"># phep so sanh +1 
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># +1
+</span>    <span class="n">i</span> <span class="o">*=</span> <span class="mi">2</span> <span class="c1"># +1</span></code></pre>
+<p>Do <code>i *= 2</code> nên vòng <code>while</code> không duyệt <code>n</code> lần mà duyệt $\log_{2}(n)$</p>
+<p>Vậy từ đó ta có được $P(n) = 3\log_{2}(n) + 4 \sim O(log_{2}(n))$</p> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+
+        
+
+    
+  </ul>
+</div>
+
+    </div>
+
+
+
+  </body>
+  
+  <script src="https://use.fontawesome.com/ba4ba69796.js"></script>
+
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="Description" content="All about technology.">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+        Python, Tensorflow and Keras
+    </title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/poole.css">
+    <link rel="stylesheet" href="../../../css/syntax.css">
+    <link rel="stylesheet" href="../../../css/hyde.css">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/techs.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/techs.png">
+    <!-- <link rel="manifest" href="/assets/site.webmanifest"> -->
+    <link rel="mask-icon" href="../../../../assets/safari-pinned-tab.svg" color="#41a9c7">
+    <link rel="shortcut icon" href="../../../assets/techs.png">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="../../../assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../atom.xml">
+
+    <!-- Javascript -->
+    
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DEV7XD3S2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1DEV7XD3S2');
+    </script>    
+
+</head>
+
+
+<body class="theme-base-purpz">
+
+  <div class="sidebar">
+<div class="container sidebar-sticky">
+
+  <div class="sidebar-about">
+    <h1>
+      <a href="../../../index.html">
+        Techs Blog
+      </a>
+    </h1>
+    <!-- <p class="lead">Simple Techs</p> -->
+    <p class="lead">@arch-techs</p>
+
+  </div>
+
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item " href="../../../../index.html">Home</a>
+
+      
+
+      
+      
+        
+        
+          
+        
+      
+        
+        
+          
+          
+        
+      
+        
+            
+        
+        
+          
+          
+        
+      
+        
+        
+          
+            <a class="sidebar-nav-item " href="../../../../about/index.html">About</a>
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+      
+        
+        
+          
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+
+      <div class="sidebar-nav-item">
+    
+        <div class="sidebar-nav-item">
+          <p>
+            <a href="https://github.com/hoangndst">
+            Github <i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+            &nbsp;
+            <a href="https://www.linkedin.com/in/nguyendinhhoang252/">
+                LinkedIn <i class="fa fa-linkedin-square" target="_blank"></i>
+            </a>&nbsp;
+            <a href="https://www.facebook.com/techs25/" target="_blank">Facebook <i class="fa fa-facebook" aria-hidden="true"></i></a>
+            &nbsp;
+            <a href="https://www.instagram.com/hoangndst" target="_blank">Instagram
+                <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </p>
+      </div>
+    </nav>
+
+    <p>&copy All rights reserved.</p>
+  </div>
+</div>
+
+<!-- Mailchimp -->
+<script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+<script type="text/javascript">
+function showMailingPopUp() {
+    console.log("showing popup");
+    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us8.list-manage.com","uuid":"31c71a4d79bd53ab3c537a59e","lid":"2416515c90","uniqueMethods":true}) })
+    document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
+
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 align="center" class="post-title">Python, Tensorflow and Keras</h1>
+  
+  <div>
+      <!-- Snippet to calculate reading time assuming WPM 200 -->
+<span style="display: inline" class="post-date" title="Estimated read time">
+    19.04.2021 &middot; @arch-techs
+</span>
+  </div>
+  <br>
+<p>1. Mạng Neural là gì?</p>
+<center>
+    <img src="../../../assets/img/ArchitecturalMultilayerPerceptron.png">
+</center>
+<p>Mạng nơ-ron nhân tạo (Neural Network - NN) là một mô hình lập trình lấy cảm hứng từ mạng nơ-ron thần kinh. Kết hợp với các kĩ thuật học sâu (Deep Learning - DL), NN đang trở thành một công cụ rất mạnh mẽ mang lại hiệu quả tốt nhất cho nhiều bài toán khó như nhận dạng ảnh, giọng nói hay xử lý ngôn ngữ tự nhiên.</p>
+<br />
+<p>2. Tensorflow là gì?</p>
+<center>
+    <img src="../../../assets/img/libraries-hero.svg">
+</center>
+<p>Tensorflow là thư viện mã nguồn mở cho machine learning nổi tiếng nhất thế giới, được phát triển bởi các nhà nghiên cứu từ Google. Việc hỗ trợ mạnh mẽ các phép toán học để tính toán trong machine learning và deep learning đã giúp việc tiếp cận các bài toán trở nên đơn giản, nhanh chóng và tiện lợi hơn nhiều. </p>
+<br />
+<p>3. Keras là gì?</p>
+<center>
+    <img src="../../../assets/img/keras.png">
+</center>
+<p>Keras là một thư viện high level (front-end) với phần low level (back-end) là Tensorflow.</p>
+<p>Cú pháp đơn giản hơn Tensorflow rất nhiều.</p>
+<p>Có thể chạy trên cả CPU, GPU.</p>
+<p>Source: MiAI</p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+
+        
+
+    
+  </ul>
+</div>
+
+<!-- Default Statcounter code for My blog
+http://hoangndst.github.io -->
+<p><small>Total visits: 
+<script type="text/javascript">
+var sc_project=12514193; 
+var sc_invisible=0; 
+var sc_security="220ef100"; 
+var sc_text=5; 
+var scJsHost = "https://";
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12514193/0/220ef100/0/"
+alt="Web Analytics"></a></div></noscript><a href="https://statcounter.com/p12514193/?guest=1"> (Powered
+by Statcounter)</a></small></p>
+<!-- End of Statcounter Code -->
+    </div>
+
+
+
+
+  </body>
+  
+  <script src="https://use.fontawesome.com/ba4ba69796.js"></script>
+
+
+</html>
