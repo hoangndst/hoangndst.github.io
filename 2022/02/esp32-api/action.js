@@ -1,4 +1,4 @@
-var server = "http://192.168.43.101:3000";
+var server = "http://192.168.43.168:3000";
 function httpPUT(url, data, callback) {
     var req = new XMLHttpRequest();
     req.open("PUT", url, true);
